@@ -9,8 +9,8 @@ def create_board():
     board = np.zeros((ROW_COUNT, COLUMN_COUNT))
     return board
 
-def drop_piece():
-    pass
+def drop_piece(board, row, col, piece):
+    board[row][col] == piece
 
 def is_valid_location(board, col):
     return board[5][col] == 0
