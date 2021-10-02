@@ -23,6 +23,14 @@ def get_next_open_row(board, col):
 def print_board(board):
     print(np.flip(board, 0))
 
+def winning_move(board, piece):
+    # Check horizontal locations for win
+    for c in range(COLUMN_COUNT-3):
+        for r in range(ROW_COUNT):
+            if board[r][c] == piece and board[r][c+1] == piece and board[r][c+2]==piece and board[r][c+3]==piece:
+                return True
+
+
 board = create_board()
 game_over = False # True = someone wins (4 in a row)
 turn = 0 # 0 - p1 turn
@@ -37,6 +45,10 @@ while not game_over:
             row = get_next_open_row(board, col)
             drop_piece(board, row, col, 1)
 
+            if winning_move(board, 1):
+                print("Player 1 Wins!")
+                game_over = True
+
     # Ask for Player 2 input
     else:
         col = int(input("Player 2 make your selection (0-6):"))
@@ -45,6 +57,9 @@ while not game_over:
             row = get_next_open_row(board, col)
             drop_piece(board, row, col, 2)
 
+            if winning_move(board, 2):
+                print("Player 2 Wins!")
+                game_over = True
     turn += 1
     turn = turn % 2
     print_board(board)
