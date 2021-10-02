@@ -6,6 +6,15 @@ def create_board():
     board = np.zeros((6, 7))
     return board
 
+def drop_piece():
+    pass
+
+def is_valid_location():
+    pass
+
+def get_next_open_row():
+    pass
+
 board = create_board()
 game_over = False # True = someone wins (4 in a row)
 turn = 0 # 0 - p1 turn
