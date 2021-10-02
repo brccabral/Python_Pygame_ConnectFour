@@ -8,6 +8,10 @@ import sys
 ROW_COUNT = 6
 COLUMN_COUNT = 7
 
+BLUE = (0, 0, 255)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+
 def create_board():
     board = np.zeros((ROW_COUNT, COLUMN_COUNT))
     return board
@@ -51,8 +55,10 @@ def winning_move(board, piece):
             if board[r][c] == piece and board[r-1][c+1] == piece and board[r-2][c+2] == piece and board[r-3][c+3] == piece:
                 return True
 
-def draw_board():
-    pass
+def draw_board(board):
+    for c in range(COLUMN_COUNT):
+        for r in range(ROW_COUNT):
+            pygame.draw.rect(screen, BLUE, (c*SQUARESIZE, r*SQUARESIZE, SQUARESIZE, SQUARESIZE))
 
 board = create_board()
 game_over = False # True = someone wins (4 in a row)
@@ -67,6 +73,8 @@ height = (ROW_COUNT+1) * SQUARESIZE
 size = (width, height)
 
 screen = pygame.display.set_mode(size)
+draw_board(board)
+pygame.display.update()
 
 while not game_over:
 
