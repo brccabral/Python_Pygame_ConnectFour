@@ -2,8 +2,11 @@
 # pip install numpy
 import numpy as np
 
+ROW_COUNT = 6
+COLUMN_COUNT = 7
+
 def create_board():
-    board = np.zeros((6, 7))
+    board = np.zeros((ROW_COUNT, COLUMN_COUNT))
     return board
 
 def drop_piece():
@@ -12,8 +15,10 @@ def drop_piece():
 def is_valid_location(board, col):
     return board[5][col] == 0
 
-def get_next_open_row():
-    pass
+def get_next_open_row(board, col):
+    for r in range(ROW_COUNT):
+        if board[r][col] == 0:
+            return r
 
 board = create_board()
 game_over = False # True = someone wins (4 in a row)
