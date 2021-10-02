@@ -20,6 +20,9 @@ def get_next_open_row(board, col):
         if board[r][col] == 0:
             return r
 
+def print_board(board):
+    print(np.flip(board, 0))
+
 board = create_board()
 game_over = False # True = someone wins (4 in a row)
 turn = 0 # 0 - p1 turn
@@ -44,7 +47,7 @@ while not game_over:
 
     turn += 1
     turn = turn % 2
-    print(board)
+    print_board(board)
 
 
 # %%
