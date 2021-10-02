@@ -1,6 +1,8 @@
 # %%
 # pip install numpy
 import numpy as np
+# pip install pygame
+import pygame
 
 ROW_COUNT = 6
 COLUMN_COUNT = 7
@@ -53,7 +55,16 @@ board = create_board()
 game_over = False # True = someone wins (4 in a row)
 turn = 0 # 0 - p1 turn
 
-# %%
+pygame.init()
+
+SQUARESIZE = 100
+width = COLUMN_COUNT * SQUARESIZE
+height = (ROW_COUNT+1) * SQUARESIZE
+
+size = (width, height)
+
+screen = pygame.display.set_mode(size)
+
 while not game_over:
     # Ask for Player 1 input
     if turn == 0:
