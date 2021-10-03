@@ -88,6 +88,8 @@ screen = pygame.display.set_mode(size)
 draw_board(board)
 pygame.display.update()
 
+myfont = pygame.font.SysFont("monospace", 75)
+
 while not game_over:
 
     for event in pygame.event.get():
@@ -106,6 +108,9 @@ while not game_over:
         pygame.display.update()
 
         if event.type == pygame.MOUSEBUTTONDOWN:
+            # resets the top to display message if game over
+            # if game continues, it will draw piece from pygame.MOUSEMOTION
+            pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARESIZE))
             (posx, posy) = event.pos
             col = int(math.floor(posx/SQUARESIZE))
             # # Ask for Player 1 input
@@ -118,6 +123,9 @@ while not game_over:
 
                     if winning_move(board, 1):
                         print("Player 1 Wins!")
+                        label = myfont.render("Player 1 Wins!", 1, RED)
+                        # label, (top left x, y)
+                        screen.blit(label, (40,10))
                         game_over = True
 
             # # Ask for Player 2 input
@@ -130,11 +138,14 @@ while not game_over:
 
                     if winning_move(board, 2):
                         print("Player 2 Wins!")
+                        label = myfont.render("Player 2 Wins!", 1, YELLOW)
+                        # label, (top left x, y)
+                        screen.blit(label, (40,10))
                         game_over = True
             turn += 1
             turn = turn % 2
             draw_board(board)
             print_board(board)
-
-
-# %%
+            
+            if game_over:
+                pygame.time.wait(3000)
