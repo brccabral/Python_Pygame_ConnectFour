@@ -63,12 +63,20 @@ def winning_move(board, piece):
                 return True
 
 def draw_board(board):
+    board = np.flip(board, 0)
     for c in range(COLUMN_COUNT):
         for r in range(ROW_COUNT):
             # surface, color, (top left x, top left y, width, height)
             pygame.draw.rect(screen, BLUE, (c*SQUARESIZE, r*SQUARESIZE+SQUARESIZE, SQUARESIZE, SQUARESIZE))
+            if board[r][c] == 1:
+                color = RED
+            elif board[r][c] == 2:
+                color = YELLOW
+            else:
+                color = BLACK
             # surface, color, (center x, center y), radius
-            pygame.draw.circle(screen, BLACK, (int(c*SQUARESIZE+SQUARESIZE/2), int(r*SQUARESIZE+SQUARESIZE+SQUARESIZE/2)), RADIUS)
+            pygame.draw.circle(screen, color, (int(c*SQUARESIZE+SQUARESIZE/2), int(r*SQUARESIZE+SQUARESIZE+SQUARESIZE/2)), RADIUS)
+    pygame.display.update()
 
 board = create_board()
 game_over = False # True = someone wins (4 in a row)
@@ -113,6 +121,7 @@ while not game_over:
                         game_over = True
             turn += 1
             turn = turn % 2
+            draw_board(board)
             print_board(board)
 
 
