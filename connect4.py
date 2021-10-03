@@ -93,6 +93,18 @@ while not game_over:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+        
+        if event.type == pygame.MOUSEMOTION:
+            # resets the first bar to all black so it can draw the piece circle just once
+            pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARESIZE))
+            (posx, posy) = event.pos
+            if turn == 0:
+                color = RED
+            else:
+                color = YELLOW
+            pygame.draw.circle(screen, color, (posx, int(SQUARESIZE/2)), RADIUS)
+        pygame.display.update()
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             (posx, posy) = event.pos
             col = int(math.floor(posx/SQUARESIZE))
