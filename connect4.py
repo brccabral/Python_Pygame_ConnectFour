@@ -11,6 +11,11 @@ COLUMN_COUNT = 7
 BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
+BLACK = (0, 0, 0)
+SQUARESIZE = 100
+width = COLUMN_COUNT * SQUARESIZE
+height = (ROW_COUNT+1) * SQUARESIZE
+RADIUS = int(SQUARESIZE/2-5)
 
 def create_board():
     board = np.zeros((ROW_COUNT, COLUMN_COUNT))
@@ -58,7 +63,10 @@ def winning_move(board, piece):
 def draw_board(board):
     for c in range(COLUMN_COUNT):
         for r in range(ROW_COUNT):
+            # surface, color, (top left x, top left y, width, height)
             pygame.draw.rect(screen, BLUE, (c*SQUARESIZE, r*SQUARESIZE+SQUARESIZE, SQUARESIZE, SQUARESIZE))
+            # surface, color, (center x, center y), radius
+            pygame.draw.circle(screen, BLACK, (int(c*SQUARESIZE+SQUARESIZE/2), int(r*SQUARESIZE+SQUARESIZE+SQUARESIZE/2)), RADIUS)
 
 board = create_board()
 game_over = False # True = someone wins (4 in a row)
@@ -66,9 +74,6 @@ turn = 0 # 0 - p1 turn
 
 pygame.init()
 
-SQUARESIZE = 100
-width = COLUMN_COUNT * SQUARESIZE
-height = (ROW_COUNT+1) * SQUARESIZE
 
 size = (width, height)
 
